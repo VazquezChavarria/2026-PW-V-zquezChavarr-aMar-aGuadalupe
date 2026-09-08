@@ -1,0 +1,3 @@
+VS => git init => git config --global user.name "VazquezChavarria" => git config --global user.email "mvazquez2403@alumno.ipn.mx"
+Github => perfil => settings => developer settings => personal access tokens (classic) => nombre de token lo que sea => borrar paquetes, administrar repositorio,administrar equipo y borrar repositorio => generar tocken=> crear nuevo repositorio => mismo nombre de la carpeta => publico => crear repositorio
+VS = archivo index.html => ctrl+s => ctrl+ñ => git add . => git status => git branch -M main =>git commit -m "agregando index"
