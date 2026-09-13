@@ -88,11 +88,8 @@ footer{
     padding: 0.25rem 0;
 }
 
-/* ===================================
-   Formulario de registro de asistencia
-   =================================== */
+/* Formulario de registro de asistencia */
 
-/* 1. Regla general para el formulario de registro */
 .formulario-registro{
     display: flex;
     flex-direction: column;
@@ -106,7 +103,6 @@ footer{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* 2. Regla para los inputs del registro */
 .formulario-registro input{
     padding: 0.6rem 0.8rem;
     border: 1px solid var(--azul-cielo);
@@ -122,7 +118,6 @@ footer{
     box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.15);
 }
 
-/* 3. Regla para el button del registro */
 .formulario-registro button{
     padding: 0.7rem 1rem;
     background-color: var(--azul-marino);
@@ -135,12 +130,10 @@ footer{
     transition: background-color 0.2s ease;
 }
 
-/* 4. Regla para el hover del boton de registro */
 .formulario-registro button:hover{
     background-color: var(--azul-indigo);
 }
 
-/* 5. Regla para cuando el registro falle */
 .formulario-registro.registro-fallido{
     border: 2px solid var(--azul-indigo);
 }
@@ -150,14 +143,12 @@ footer{
     font-weight: 600;
 }
 
-/* 6. Regla para cuando un input sea invalido */
 .formulario-registro input:invalid,
 .formulario-registro input.invalido{
     border-color: var(--azul-indigo);
     background-color: #eef1fd;
 }
 
-/* 7. Regla para cuando el registro sea exitoso */
 .formulario-registro.registro-exitoso{
     border: 2px solid var(--azul-cielo);
 }
