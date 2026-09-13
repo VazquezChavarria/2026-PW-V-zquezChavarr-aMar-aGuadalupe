@@ -12,7 +12,7 @@ body {
 header{
     background-color: #0f172a;
     color: #ffffff;
-    padding: 1.5 rem;
+    padding: 1.5rem;
     text-align: center;
 }
 
@@ -35,7 +35,7 @@ footer{
 
 /*Catalogo de talleres */
 
-.catalog{
+.catalogo{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 1rem;
