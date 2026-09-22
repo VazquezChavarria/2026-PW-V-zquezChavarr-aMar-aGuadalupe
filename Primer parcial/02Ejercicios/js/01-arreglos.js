@@ -10,9 +10,15 @@ talleres.forEach((t) => console.log(`- ${t.nombre}(${t.inscritos}/${t.cupo})`));
 
 
 console.log("Aplicando función Map con solo Nombres")
-const nombre = talleres.map ((t) => t.nombre);
+const nombres = talleres.map((t) => t.nombre);
 console.log(nombres);
 
 
-console.log("Aplicando la función Filter en los talleres")
+console.log("Aplicando la función Filter en los talleres con cupo lleno")
 const llenos = talleres.filter((t) => t.inscritos >= t.cupo);
+console.log(llenos);
+
+
+console.log("Aplicando la función Find para buscar un taller por instructor")
+const encontrado = talleres.find((t) => t.instructor === 'Ing. María López');
+console.log(encontrado);
