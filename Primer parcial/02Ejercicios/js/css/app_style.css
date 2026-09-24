@@ -1,0 +1,220 @@
+:root{
+  --azul: #0000FF;
+  --azul-indigo: #4052D6;
+  --azul-cielo: #1591EA;
+  --azul-marino: #00008A;
+
+  --tinta: #10142B;
+  --papel: #F5F7FC;
+  --linea: #D6DCF2;
+  --blanco: #FFFFFF;
+
+  --radio: 10px;
+  --sombra: 0 12px 28px -14px rgba(0, 0, 138, 0.35);
+}
+
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- Encabezado ---------- */
+
+header{
+  background: linear-gradient(120deg, var(--azul-marino), var(--azul) 55%, var(--azul-cielo));
+  padding: 2.5rem 1.5rem 3.5rem;
+  color: var(--blanco);
+}
+
+header h1{
+  margin: 0 auto;
+  max-width: 760px;
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Contenido ---------- */
+
+main{
+  max-width: 760px;
+  margin: -2rem auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.ejercicio{
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+}
+
+.ejercicio h2{
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: var(--azul-marino);
+}
+
+.ejercicio h2 code{
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.85em;
+  color: var(--azul-indigo);
+}
+
+.ejercicio > p{
+  color: #4B5170;
+  margin-top: 0.25rem;
+}
+
+/* ---------- Tabla ---------- */
+
+.tabla-scroll{
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  margin: 1.25rem 0 1.75rem;
+}
+
+.tabla-talleres{
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+
+.tabla-talleres thead th{
+  text-align: left;
+  background: var(--azul-marino);
+  color: var(--blanco);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+}
+
+.tabla-talleres tbody td{
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--linea);
+}
+
+.tabla-talleres tbody tr:nth-child(even){
+  background: var(--papel);
+}
+
+.tabla-talleres tbody tr:hover{
+  background: #E7ECFB;
+}
+
+/* ---------- Formulario ---------- */
+
+.formulario{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.9rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--linea);
+}
+
+.campos{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+}
+
+.campos label{
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--azul-marino);
+  margin-bottom: 0.3rem;
+}
+
+.formulario select,
+.formulario input[type="text"]{
+  border: 1.5px solid var(--linea);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--tinta);
+  background: var(--blanco);
+  min-width: 220px;
+}
+
+.formulario select:focus,
+.formulario input[type="text"]:focus{
+  outline: 3px solid rgba(21, 145, 234, 0.35);
+  border-color: var(--azul-cielo);
+}
+
+.formulario button{
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  background: var(--azul);
+  color: var(--blanco);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.formulario button:hover{
+  background: var(--azul-indigo);
+}
+
+.formulario button:focus-visible,
+.formulario select:focus-visible,
+.formulario input:focus-visible{
+  outline: 3px solid var(--azul-cielo);
+  outline-offset: 2px;
+}
+
+/* ---------- Resultado ---------- */
+
+.resultado{
+  display: block;
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  min-height: 1.5rem;
+  white-space: pre-line;
+  background: var(--papel);
+  border-left: 4px solid var(--azul-cielo);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--tinta);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 480px){
+  .ejercicio{
+    padding: 1.25rem;
+  }
+
+  .formulario{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .formulario button{
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .formulario button{
+    transition: none;
+  }
+}

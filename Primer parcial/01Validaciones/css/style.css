@@ -1,0 +1,159 @@
+:root{
+  --azul: #0000FF;
+  --azul-indigo: #4052D6;
+  --azul-cielo: #1591EA;
+  --azul-marino: #00008A;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, Arial, sans-serif;
+    color: #1f2937;
+    background-color: #f9fafb;
+}
+
+header{
+    background-color: var(--azul-marino);
+    color: #ffffff;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header a{
+    color: #ffffff;
+}
+
+main{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+footer{
+    text-align: center;
+    padding: 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Catalogo de talleres */
+
+.catalogo{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1rem;
+}
+
+.tarjeta{
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+}
+
+.tarjeta h2{
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.tarjeta a{
+    color: var(--azul-marino);
+    text-decoration: none;
+}
+
+.tarjeta a:hover{
+    text-decoration: underline;
+}
+
+/* Bitacora de asistencia */
+
+.bitacora{
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+.bitacora ul{
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.bitacora li{
+    padding: 0.25rem 0;
+}
+
+/* Formulario de registro de asistencia */
+
+.formulario-registro{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 420px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formulario-registro input{
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--azul-cielo);
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formulario-registro input:focus{
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.15);
+}
+
+.formulario-registro button{
+    padding: 0.7rem 1rem;
+    background-color: var(--azul-marino);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.formulario-registro button:hover{
+    background-color: var(--azul-indigo);
+}
+
+.formulario-registro.registro-fallido{
+    border: 2px solid var(--azul-indigo);
+}
+
+.formulario-registro .mensaje.mensaje-fallido{
+    color: var(--azul-indigo);
+    font-weight: 600;
+}
+
+.formulario-registro input:invalid,
+.formulario-registro input.invalido{
+    border-color: var(--azul-indigo);
+    background-color: #eef1fd;
+}
+
+.formulario-registro.registro-exitoso{
+    border: 2px solid var(--azul-cielo);
+}
+
+.formulario-registro .mensaje.mensaje-exitoso{
+    color: var(--azul-cielo);
+    font-weight: 600;
+}

@@ -1,0 +1,74 @@
+:root{
+  --azul: #0000FF;
+  --azul-indigo: #4052D6;
+  --azul-cielo: #1591EA;
+  --azul-marino: #00008A;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  color: #1f2937;
+  background-color: #f4f6fb;
+}
+
+.container{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.header{
+  background-color: var(--azul-marino);
+  color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.content{
+  padding: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.tablas_ejercicios{
+  margin-top: 1rem;
+}
+
+.tabla{
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabla thead{
+  background-color: var(--azul);
+  color: #ffffff;
+}
+
+.tabla th,
+.tabla td{
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla tbody tr:hover{
+  background-color: #eef2ff;
+}
+
+.tabla a{
+  color: var(--azul-indigo);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tabla a:hover{
+  color: var(--azul-cielo);
+  text-decoration: underline;
+}
