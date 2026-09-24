@@ -43,6 +43,42 @@
         </form>
         <output class="resultado" id="resultado-arreglo" for="form-arreglo" ></output>
         </section>
+        <section class="ejercicio" aria-labelledby="titulo-objetos">
+            <h2 id="titulo-objetos">Segunda parte de ejercicios manejo de objeto y JSON </h2>
+            <p>Elige el taaller y elije que operacion aplicarle:</p>
+            <form class="formulario" id="form-objetos" >
+                <div class="campos">
+                    <label for="obj-nombre">Nombre</label>
+                    <input type="text" id="obj-nombre" name="obj-nombre"value="Introduccion a phyton">
+
+                </div>
+                <div class="campos">
+                    <label for="obj-instructor">Instructor</label>
+                    <input type="text" id="obj-instructor" name="obj-instructor" value="Ing. Maria Lopez">
+                </div>
+                <div class="campos">
+                    <label for="obj-cupo">Cupo</label>
+                    <input type="number" id="obj-cupo" name="obj-cupo" value="25" min="0">
+                </div>
+                
+                <div class="campos campo-corta">
+                    <label for="obj-inscritos">Inscritos</label>
+                    <input type="text" id="obj-inscritos" name="obj-inscritos" value="20" min="0">
+                </div>
+                <div class="campos">
+                    <label for="operacion-objeto">Operación a realizar</label>
+                    <select name="operacion-objeto" id="operacion-objeto">
+                        <option value="keys">Object.keys</option>
+                        <option value="values">Object.values</option>
+                        <option value="entries">Object.entries</option>
+                        <option value="stringify">JSON.stringify</option>
+                        <option value="roundtrip">Ida y vuelta de cadena a JSON</option>
+                    </select>
+                </div>
+                <button type="submit">Ejecutar opcion de objeto</button>
+            </form>
+            <output class="resultado" id="resultado-objeto" for="form-objeto" ></output>
+        </section>
     </main>
     <script src="./01-arreglos.js"></script>
     <script src="./app.js"></script>

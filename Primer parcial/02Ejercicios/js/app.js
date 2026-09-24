@@ -69,3 +69,51 @@ formArreglos.addEventListener('submit', (evento) => {
 
 // Pinta la tabla apenas carga la página
 pintarTabla();
+
+//ejercicios de objetos 
+
+const formObjetos = document.getElementById('form-objetos');
+const resultadoObjetos = document.getElementById('resultado-objetos');
+
+formObjetos.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+
+    //necesitamos construir el objeto de taller
+    const taller = {
+        nombre: document.getElementById('obj-nombre').value,
+        instructor: document.getElementById('obj-instructor').value,
+        cupo: Number(document.getElementById('obj-cupo').value),
+        inscritos: Number(document.getElementById('obj-inscritos').value)
+    };
+    const operacion = document.getElementById('operacion-objeto').value;
+
+    let resultado;
+
+    switch (operacion) {
+        case 'keys':
+            resultado = JSON.stringify(Object.keys(taller));
+            break;
+        case 'values':
+            resultado = JSON.stringify(Object.values(taller));
+            break;
+        case 'entries':
+            resultado = JSON.stringify(Object.entries(taller));
+            break;
+        case 'stringify':
+            const textoJson = JSON.stringify(taller, null, 2);
+            resultado = `${textoJson}\n \n Tipo: ${typeof textoJson}`;
+            break;
+        case 'roundtrip':
+            const textoJsons = JSON.stringify(taller, null, 2);
+            const objetoDeVuelta = JSON.parse(textoJsons);
+
+            resultado = [
+                textoJsons,
+                '',
+                `${typeof objetoDeVuelta}`,
+                objetoDeVuelta.nombre
+            ].join('\n');
+            break;
+    }
+    resultadoObjetos.textContent = resultado;
+});
