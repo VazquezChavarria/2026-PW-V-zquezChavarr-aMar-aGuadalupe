@@ -1,26 +1,45 @@
 // 03-strings-fechas.js
 // Métodos de string más usados + el objeto Date — conecta con la validación
-// de fecha (DD/MM/AAAA) de la semana 4. Completa cada TODO.
+// de fecha (DD/MM/AAAA) de la semana 4.
+// Se ejecuta con: node 03-strings-fechas.js
 
 const entrada = '  María López  ';
 
-// TODO: trim — imprime `entrada` sin espacios sobrantes
+// trim — quita los espacios sobrantes al inicio y al final
+console.log('Ejemplo de uso de .trim()');
+console.log(`"${entrada.trim()}"`);
 
-// TODO: split — parte el resultado del trim en un arreglo `partes`, separado por espacio
+// split — parte el resultado del trim en un arreglo, usando un separador (espacio)
+console.log('\nEjemplo de split');
+const partes = entrada.trim().split(' ');
+console.log(partes);
 
-// TODO: includes — imprime si 'correo@cecyt9.ipn.mx' contiene '@'
+// includes — indica si el texto contiene '@'
+console.log('\nManejo de includes');
+console.log('correo@cecyt9.ipn.mx'.includes('@'));
 
-// TODO: replace y replaceAll — con '05/09/2026', reemplaza '/' por '-'
-//       primero con replace (una sola vez) y luego con replaceAll (todas)
+// replace y replaceAll — cambian '/' por '-'
+console.log('\nManejo de replace / replaceAll');
+console.log('05/09/2026'.replace('/', '-'));     // solo la primera '/'
+console.log('05/09/2026'.replaceAll('/', '-'));  // todas las '/'
 
-// TODO: template literals — usando `nombre = 'María'` y `cupo = 25`, imprime
-//       "María se inscribió en un taller con cupo para 25 personas."
+// template literals — mezclan texto y variables
+console.log('\nUso de template literals');
+const nombre = 'María';
+const cupo = 25;
+console.log(`${nombre} se inscribió en un taller con cupo para ${cupo} personas.`);
 
-// TODO: Date — completa esta función para construir un objeto Date a partir
-// de un texto 'DD/MM/AAAA' (recuerda: los meses en Date empiezan en 0)
+// Date — construye un Date a partir de 'DD/MM/AAAA' (los meses en Date empiezan en 0)
+console.log('\nManejo de Date');
 function fechaDesdeTexto(textoFecha) {
-  // TODO
+  const [dia, mes, anio] = textoFecha.split('/').map(Number);
+  return new Date(anio, mes - 1, dia);
 }
 
-// TODO: usa fechaDesdeTexto('05/09/2026'), imprime su toISOString() y su
-// getDay(); luego calcula cuántos días de diferencia hay contra `new Date()`
+const fechaAsistencia = fechaDesdeTexto('05/09/2026');
+console.log('Fecha construida:', fechaAsistencia.toISOString());
+console.log('Día de la semana (0 = domingo):', fechaAsistencia.getDay());
+
+const hoy = new Date();
+const diasDeDiferencia = Math.round((fechaAsistencia - hoy) / (1000 * 60 * 60 * 24));
+console.log(`Faltan ${diasDeDiferencia} día(s) para la fecha de asistencia (negativo si ya pasó).`);

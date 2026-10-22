@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,61 +9,63 @@
 <body>
     <header><h1>Ejercicios con node</h1></header>
     <main>
-        <section class="ejercicio" >
+        <!-- 1. ARREGLOS -->
+        <section class="ejercicio" aria-labelledby="titulo-arreglos">
             <h2 id="titulo-arreglos">Arreglos del código <code>01-arreglos.js</code></h2>
             <p>Datos de prueba con JS</p>
-            <div class="tabla-scroll"><table class="tabla-talleres">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Instructor</th>
-                        <th>Cupo</th>
-                        <th>Inscritos</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-        <form id="form-arreglos" class="formulario">
-            <div class="campos">
-                <label for="operacion-arreglo" name-operación-arreglo>Operación</label>
-                <select name="operacion-arreglo" id="operacion-arreglo">
-                    <option value="forEach">ForEach - Lista Simple</option>
-                    <option value="map">map - Copia solo nombres</option>
-                    <option value="filter">filter - Filtar Talleres con cupo lleno</option>
-                    <option value="find">find - Buscar por el nombre de instructor</option>
-                </select>
-                <input type="text" id="buscar-instructor" placeholder="Nombre del instructor" style="display:none;">
+            <div class="tabla-scroll">
+                <table class="tabla-talleres">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Instructor</th>
+                            <th>Cupo</th>
+                            <th>Inscritos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
-
-            <button type="submit">Ejecutar</button>
-
-        </form>
-        <output class="resultado" id="resultado-arreglo" for="form-arreglo" ></output>
+            <!-- CORRECCIÓN: el formulario ahora queda dentro de su sección -->
+            <form id="form-arreglos" class="formulario">
+                <div class="campos">
+                    <!-- CORRECCIÓN: se quitó el atributo suelto "name-operación-arreglo" -->
+                    <label for="operacion-arreglo">Operación</label>
+                    <select name="operacion-arreglo" id="operacion-arreglo">
+                        <option value="forEach">forEach - Lista simple</option>
+                        <option value="map">map - Copia solo nombres</option>
+                        <option value="filter">filter - Talleres con cupo lleno</option>
+                        <option value="find">find - Buscar por nombre del instructor</option>
+                    </select>
+                    <input type="text" id="buscar-instructor" placeholder="Nombre del instructor" style="display:none;">
+                </div>
+                <button type="submit">Ejecutar</button>
+            </form>
+            <output class="resultado" id="resultado-arreglo" for="form-arreglos"></output>
         </section>
+
+        <!-- 2. OBJETOS Y JSON -->
         <section class="ejercicio" aria-labelledby="titulo-objetos">
-            <h2 id="titulo-objetos">Segunda parte de ejercicios manejo de objeto y JSON </h2>
-            <p>Elige el taaller y elije que operacion aplicarle:</p>
-            <form class="formulario" id="form-objetos" >
+            <h2 id="titulo-objetos">Segunda parte de ejercicios: manejo de objetos y JSON</h2>
+            <p>Edita el taller y elige qué operación aplicarle:</p>
+            <form class="formulario" id="form-objetos">
                 <div class="campos">
                     <label for="obj-nombre">Nombre</label>
-                    <input type="text" id="obj-nombre" name="obj-nombre"value="Introduccion a phyton">
-
+                    <input type="text" id="obj-nombre" name="obj-nombre" value="Introducción a Python">
                 </div>
                 <div class="campos">
                     <label for="obj-instructor">Instructor</label>
-                    <input type="text" id="obj-instructor" name="obj-instructor" value="Ing. Maria Lopez">
+                    <input type="text" id="obj-instructor" name="obj-instructor" value="Ing. María López">
                 </div>
                 <div class="campos">
                     <label for="obj-cupo">Cupo</label>
                     <input type="number" id="obj-cupo" name="obj-cupo" value="25" min="0">
                 </div>
-                
                 <div class="campos campo-corta">
                     <label for="obj-inscritos">Inscritos</label>
-                    <input type="text" id="obj-inscritos" name="obj-inscritos" value="20" min="0">
+                    <!-- CORRECCIÓN: type="number", porque min solo funciona en números -->
+                    <input type="number" id="obj-inscritos" name="obj-inscritos" value="20" min="0">
                 </div>
                 <div class="campos">
                     <label for="operacion-objeto">Operación a realizar</label>
@@ -75,9 +77,32 @@
                         <option value="roundtrip">Ida y vuelta de cadena a JSON</option>
                     </select>
                 </div>
-                <button type="submit">Ejecutar opcion de objeto</button>
+                <button type="submit">Ejecutar opción de objeto</button>
             </form>
-            <output class="resultado" id="resultado-objeto" for="form-objeto" ></output>
+            <output class="resultado" id="resultado-objeto" for="form-objetos"></output>
+        </section>
+
+        <!-- 3. STRINGS Y FECHAS (sección nueva) -->
+        <section class="ejercicio" aria-labelledby="titulo-texto">
+            <h2 id="titulo-texto">3. Strings y fechas</h2>
+            <p>La fecha usa el formato <strong>DD/MM/AAAA</strong>, validado con una expresión regular.</p>
+            <form class="formulario" id="form-texto">
+                <div class="campos">
+                    <label for="nombre-entrada">Nombre (con espacios de sobra a propósito)</label>
+                    <input type="text" id="nombre-entrada" name="nombre-entrada" value="  María López  ">
+                </div>
+                <div class="campos">
+                    <label for="cupo-entrada">Cupo (para el template literal)</label>
+                    <input type="number" id="cupo-entrada" name="cupo-entrada" value="25" min="0">
+                </div>
+                <div class="campos">
+                    <label for="fecha-entrada">Fecha de asistencia (DD/MM/AAAA)</label>
+                    <input type="text" id="fecha-entrada" name="fecha-entrada" value="05/09/2026">
+                    <span class="error" id="error-fecha"></span>
+                </div>
+                <button type="submit">Ejecutar</button>
+            </form>
+            <output class="resultado" id="resultado-texto" for="form-texto"></output>
         </section>
     </main>
     <script src="./01-arreglos.js"></script>

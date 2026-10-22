@@ -1,4 +1,7 @@
-function pintarTabla(){
+// ============================================================
+// 1. ARREGLOS  (usa la lista `talleres` de 01-arreglos.js)
+// ============================================================
+function pintarTabla() {
     // Obtiene el <tbody> de la tabla y lo llena con los datos de talleres
     const tbody = document.querySelector('.tabla-talleres tbody');
     tbody.innerHTML = '';
@@ -70,15 +73,17 @@ formArreglos.addEventListener('submit', (evento) => {
 // Pinta la tabla apenas carga la página
 pintarTabla();
 
-//ejercicios de objetos 
-
+// ============================================================
+// 2. OBJETOS Y JSON
+// ============================================================
 const formObjetos = document.getElementById('form-objetos');
-const resultadoObjetos = document.getElementById('resultado-objetos');
+// CORRECCIÓN: el id en el HTML es "resultado-objeto" (sin "s" al final)
+const resultadoObjetos = document.getElementById('resultado-objeto');
 
 formObjetos.addEventListener('submit', (evento) => {
     evento.preventDefault();
 
-    //necesitamos construir el objeto de taller
+    // Construimos el objeto de taller con lo que escribió el usuario
     const taller = {
         nombre: document.getElementById('obj-nombre').value,
         instructor: document.getElementById('obj-instructor').value,
@@ -99,25 +104,81 @@ formObjetos.addEventListener('submit', (evento) => {
         case 'entries':
             resultado = JSON.stringify(Object.entries(taller));
             break;
-        case 'stringify':
+        case 'stringify': {
             const textoJson = JSON.stringify(taller, null, 2);
-            resultado = `${textoJson}\n \n Tipo: ${typeof textoJson}`;
+            resultado = `${textoJson}\n\nTipo: ${typeof textoJson}`;
             break;
-        case 'roundtrip':
-            const textoJsons = JSON.stringify(taller, null, 2);
-            const objetoDeVuelta = JSON.parse(textoJsons);
-
+        }
+        case 'roundtrip': {
+            const textoJson = JSON.stringify(taller, null, 2);
+            const objetoDeVuelta = JSON.parse(textoJson);
             resultado = [
-                textoJsons,
+                textoJson,
                 '',
-                `${typeof objetoDeVuelta}`,
-                objetoDeVuelta.nombre
+                `Tipo de vuelta: ${typeof objetoDeVuelta}`,
+                `Nombre: ${objetoDeVuelta.nombre}`
             ].join('\n');
             break;
+        }
+        default:
+            resultado = '';
     }
-<<<<<<< HEAD
-    resultadoObjetos.textContent = resultado; 
-=======
+
+    // CORRECCIÓN: se eliminaron las marcas de conflicto de git (<<<<<<< HEAD / ======= / >>>>>>>)
     resultadoObjetos.textContent = resultado;
->>>>>>> 55a5491a0f28e737ecf0b6d8a5c46010c18548a8
+});
+
+// ============================================================
+// 3. STRINGS Y FECHAS  (sección nueva)
+// ============================================================
+const formTexto = document.getElementById('form-texto');
+const resultadoTexto = document.getElementById('resultado-texto');
+const errorFecha = document.getElementById('error-fecha');
+
+// Construye un Date a partir de 'DD/MM/AAAA' (los meses en Date empiezan en 0)
+function fechaDesdeTexto(textoFecha) {
+    const [dia, mes, anio] = textoFecha.split('/').map(Number);
+    return new Date(anio, mes - 1, dia);
+}
+
+formTexto.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+
+    const entrada = document.getElementById('nombre-entrada').value;
+    const cupoTexto = document.getElementById('cupo-entrada').value;
+    const textoFecha = document.getElementById('fecha-entrada').value.trim();
+
+    // Validación de fecha con expresión regular DD/MM/AAAA
+    const patronFecha = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!patronFecha.test(textoFecha)) {
+        errorFecha.textContent = 'La fecha debe tener el formato DD/MM/AAAA';
+        resultadoTexto.textContent = '';
+        return;
+    }
+    const fecha = fechaDesdeTexto(textoFecha);
+    // Detecta fechas imposibles como 31/02/2026
+    const [dia, mes, anio] = textoFecha.split('/').map(Number);
+    if (fecha.getFullYear() !== anio || fecha.getMonth() !== mes - 1 || fecha.getDate() !== dia) {
+        errorFecha.textContent = 'Esa fecha no existe en el calendario';
+        resultadoTexto.textContent = '';
+        return;
+    }
+    errorFecha.textContent = '';
+
+    const nombreLimpio = entrada.trim();
+    const partes = nombreLimpio.split(' ');
+    const hoy = new Date();
+    const dias = Math.round((fecha - hoy) / (1000 * 60 * 60 * 24));
+
+    resultadoTexto.textContent = [
+        `trim: "${nombreLimpio}"`,
+        `split: ${JSON.stringify(partes)}`,
+        `includes('@') en el nombre: ${entrada.includes('@')}`,
+        `replace: ${textoFecha.replace('/', '-')}`,
+        `replaceAll: ${textoFecha.replaceAll('/', '-')}`,
+        `template literal: ${nombreLimpio} se inscribió en un taller con cupo para ${cupoTexto} personas.`,
+        `Date (ISO): ${fecha.toISOString()}`,
+        `Día de la semana (0 = domingo): ${fecha.getDay()}`,
+        `Diferencia contra hoy: ${dias} día(s)`
+    ].join('\n');
 });
