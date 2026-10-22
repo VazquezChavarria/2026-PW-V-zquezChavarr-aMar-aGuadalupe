@@ -115,5 +115,9 @@ formObjetos.addEventListener('submit', (evento) => {
             ].join('\n');
             break;
     }
+<<<<<<< HEAD
     resultadoObjetos.textContent = resultado; 
+=======
+    resultadoObjetos.textContent = resultado;
+>>>>>>> 55a5491a0f28e737ecf0b6d8a5c46010c18548a8
 });
