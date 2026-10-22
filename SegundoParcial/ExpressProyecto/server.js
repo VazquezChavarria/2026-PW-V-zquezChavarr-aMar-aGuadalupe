@@ -29,6 +29,11 @@ app.get('/usuarios/:id', usuarios.obtenerUsuario);
 app.post('/usuarios', usuarios.crearUsuario);
 app.put('/usuarios/:id', usuarios.actualizarUsuario);
 app.delete('/usuarios/:id', usuarios.eliminarUsuario);
+
+// talleres (con sus inscripciones) y asistencias
+app.use('/talleres', require('./Rutas/talleres'));
+app.use('/asistencias', require('./Rutas/asistencias'));
+
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
