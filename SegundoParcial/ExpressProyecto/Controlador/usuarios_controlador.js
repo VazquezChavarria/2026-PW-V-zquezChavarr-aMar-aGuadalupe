@@ -1,5 +1,7 @@
-const bcrypt = require('bcrypt');
-const usuariosModelo = require('../modelos/usuarios'); // ajusta la ruta
+// CORRECCIÓN: el paquete instalado es bcryptjs (no bcrypt)
+const bcrypt = require('bcryptjs');
+// CORRECCIÓN: la carpeta se llama Modelo (con mayúscula y en singular)
+const usuariosModelo = require('../Modelo/usuarios');
 const { validarCorreo, validarBoleta, validarContrasena } = require('../validaciones');
 
 // ¿Se duplicó el correo o la boleta?
@@ -9,7 +11,8 @@ function esDuplicado(error) {
 
 async function listarUsuarios(req, res) {
     try {
-        const usuarios = await usuariosModelo.obtenerTodos();
+        // CORRECCIÓN: el modelo exporta listar(), no obtenerTodos()
+        const usuarios = await usuariosModelo.listar();
         res.json(usuarios);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -31,45 +34,51 @@ async function crearUsuario(req, res) {
 
     if (!nombre || !correo || !boleta || !contrasena) {
         return res.status(400).json({
-            error: 'nombre, contraseña, correo y boleta son obligatorios, favor de verificar los datos'
+            error: 'nombre, correo, boleta y contraseña son obligatorios, favor de verificar los datos'
         });
     }
-    if (!validarCorreo(correo)) return res.status(400).json({ error: 'correo no valido' });
-    if (!validarBoleta(boleta)) return res.status(400).json({ error: 'la boleta debe tener 10 digitos' });
-    if (!validarContrasena(contrasena)) return res.status(400).json({ error: 'contraseña no valida' });
+    if (!validarCorreo(correo)) return res.status(400).json({ error: 'El correo no tiene un formato válido' });
+    if (!validarBoleta(boleta)) return res.status(400).json({ error: 'La boleta debe tener 10 dígitos' });
+    if (!validarContrasena(contrasena)) return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres' });
 
     try {
         const contrasenaHash = await bcrypt.hash(contrasena, 10);
-        const usuario = await usuariosModelo.crear(nombre, correo, boleta, contrasenaHash, rol);
+        // CORRECCIÓN: el modelo recibe UN objeto, no argumentos sueltos
+        const usuario = await usuariosModelo.crear({ nombre, correo, contrasenaHash, boleta, rol });
         res.status(201).json(usuario);
     } catch (error) {
         if (esDuplicado(error)) {
-            return res.status(409).json({ error: 'ya existe alguien con esa boleta o correo' });
+            return res.status(409).json({ error: 'Ya existe un usuario con esa boleta o ese correo' });
         }
         res.status(500).json({ error: error.message });
     }
 }
 
 async function actualizarUsuario(req, res) {
-    const { nombre, correo, boleta, contrasena, rol } = req.body;
+    const { nombre, correo, rol } = req.body;
 
-    if (correo !== undefined && nombre !== undefined && rol !== undefined) {
-        return res.status(400).json({ error: 'debe de ingresar alguno de los siguientes datos para actualizar: nombre, correo o rol' });
+    // CORRECCIÓN: debe mandar al menos UNO de los tres campos (antes solo fallaba si venían los tres)
+    if (nombre === undefined && correo === undefined && rol === undefined) {
+        return res.status(400).json({
+            error: 'Debe ingresar alguno de los siguientes datos para actualizar: nombre, correo o rol'
+        });
     }
     if (correo !== undefined && !validarCorreo(correo)) {
-        return res.status(400).json({ error: 'El correo no tiene un formato valido' });
+        return res.status(400).json({ error: 'El correo no tiene un formato válido' });
     }
     try {
         const usuario = await usuariosModelo.actualizar(req.params.id, { nombre, correo, rol });
         if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
-        res.status(401).json(usuario);
+        // CORRECCIÓN: actualizar con éxito responde 200 (antes era 401, que significa "no autorizado")
+        res.status(200).json(usuario);
     } catch (error) {
-        if (esDuplicado(error)) 
-            return res.status(409).json({ error: 'ya existe alguien con ese correo, ingresa uno diferente' });
-            res.status(500).json({ error: error.message });
-        
+        if (esDuplicado(error)) {
+            return res.status(409).json({ error: 'Ya existe un usuario con ese correo, ingresa uno diferente' });
+        }
+        res.status(500).json({ error: error.message });
     }
 }
+
 async function eliminarUsuario(req, res) {
     try {
         const eliminado = await usuariosModelo.eliminar(req.params.id);
@@ -79,4 +88,5 @@ async function eliminarUsuario(req, res) {
         res.status(500).json({ error: error.message });
     }
 }
+
 module.exports = { listarUsuarios, obtenerUsuario, crearUsuario, actualizarUsuario, eliminarUsuario };

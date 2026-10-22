@@ -2,52 +2,58 @@ const pool = require('../db-local');
 
 const COLUMNAS_PUBLICAS = 'id, nombre, correo, boleta, rol';
 
-//consultar todos los usuarios
+// consultar todos los usuarios
 async function listar() {
     const [filas] = await pool.query(`SELECT ${COLUMNAS_PUBLICAS} FROM usuarios ORDER BY id`);
     return filas;
 }
 
-
-//consultar por id
+// consultar por id
 async function obtenerPorId(id) {
     const [filas] = await pool.query(`SELECT ${COLUMNAS_PUBLICAS} FROM usuarios WHERE id = ?`, [id]);
-    return filas [0];
+    return filas[0];
 }
 
-//registrar un nuevo usuario
-async function crear({nombre, correo,contrasenaHash, boleta, rol}) {
-    const [info] = await pool.query(`INSERT INTO usuarios (nombre, correo, contrasena_hash, boleta, rol) VALUES (?, ?, ?, ?, ?)`, 
-        [nombre, correo, contrasenaHash, boleta, rol || 'alumno']);
+// registrar un nuevo usuario
+async function crear({ nombre, correo, contrasenaHash, boleta, rol }) {
+    const [info] = await pool.query(
+        `INSERT INTO usuarios (nombre, correo, contrasena_hash, boleta, rol) VALUES (?, ?, ?, ?, ?)`,
+        [nombre, correo, contrasenaHash, boleta, rol || 'alumno']
+    );
     return obtenerPorId(info.insertId);
 }
 
-//actualizar un alumno
-async function actualizar(id, {nombre, correo, rol}) {
-    const [cambios] = Object.entries({nombre, correo, rol}).filter(([_, valor]) => valor !== undefined);
-    if(cambios.length === 0) return obtenerPorId(id);
+// actualizar un usuario (solo los campos que lleguen)
+async function actualizar(id, { nombre, correo, rol }) {
+    // CORRECCIÓN: sin corchetes; así `cambios` es la lista completa de [columna, valor]
+    const cambios = Object.entries({ nombre, correo, rol }).filter(([, valor]) => valor !== undefined);
+    if (cambios.length === 0) return obtenerPorId(id);
 
     const columnas = cambios.map(([columna]) => `${columna} = ?`).join(', ');
-    const [info] = await pool.query(`UPDATE usuarios SET ${columnas} WHERE id = ?`, [...cambios.map(([, valor]) => valor), id]);
-    if(info.affectedRows === 0) return undefined;
+    const [info] = await pool.query(
+        `UPDATE usuarios SET ${columnas} WHERE id = ?`,
+        [...cambios.map(([, valor]) => valor), id]
+    );
+    if (info.affectedRows === 0) return undefined;
     return obtenerPorId(id);
 }
 
-//eliminar
-async function eliminar() {
+// eliminar
+// CORRECCIÓN: ahora recibe el parámetro id
+async function eliminar(id) {
     const [info] = await pool.query(`DELETE FROM usuarios WHERE id = ?`, [id]);
     return info.affectedRows > 0;
 }
 
-//buscar por correo
+// buscar por correo (incluye el hash, para el login)
 async function buscarPorCorreoConHash(correo) {
     const [filas] = await pool.query(`SELECT * FROM usuarios WHERE correo = ?`, [correo]);
     return filas[0];
 }
 
-//siempre es necesario exportar las funciones para poder creae su api
-module.exports = {listar, obtenerPorId, crear, actualizar, eliminar, buscarPorCorreoConHash};
+// siempre hay que exportar las funciones para poder crear la API
+module.exports = { listar, obtenerPorId, crear, actualizar, eliminar, buscarPorCorreoConHash };
 
-//crear las otras identidades talleres y asistencias
-//para taller hay que crear las funciones de consultarportaller y registrarse en un taller
-//para asistencia hay que crear las funciones de registrarasistencia en el taller, consultarlistadeasistencia
+// Pendiente (tarea): crear las otras entidades, talleres y asistencias
+// - talleres: consultarPorTaller y registrarseEnUnTaller
+// - asistencias: registrarAsistenciaEnElTaller y consultarListaDeAsistencias

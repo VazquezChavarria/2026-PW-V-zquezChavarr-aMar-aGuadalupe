@@ -22,7 +22,13 @@ app.post('/eco', (req, res) => {
     }
     res.status(201).json({eco: texto});
 });
+const usuarios = require('./Controlador/usuarios_controlador');
 
+app.get('/usuarios', usuarios.listarUsuarios);
+app.get('/usuarios/:id', usuarios.obtenerUsuario);
+app.post('/usuarios', usuarios.crearUsuario);
+app.put('/usuarios/:id', usuarios.actualizarUsuario);
+app.delete('/usuarios/:id', usuarios.eliminarUsuario);
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
