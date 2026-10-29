@@ -7,6 +7,9 @@ return (
         <p>
             <Link href="/practica/1">Ir a la pagina 1</Link>
         </p>
+        <p>
+            <Link href="/talleres">Ver talleres</Link> · <Link href="/perfil">Mi perfil</Link>
+        </p>
     </main>
 )
 }

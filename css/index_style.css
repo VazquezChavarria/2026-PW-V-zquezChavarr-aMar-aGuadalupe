@@ -72,3 +72,25 @@ body{
   color: var(--azul-cielo);
   text-decoration: underline;
 }
+.titulo-parcial{
+  margin: 2rem 0 0.75rem;
+  color: var(--azul-marino);
+  border-left: 6px solid var(--azul-cielo);
+  padding-left: 0.75rem;
+}
+
+.nota{
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.sin-enlace{
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.table_content{
+  overflow-x: auto;
+}
