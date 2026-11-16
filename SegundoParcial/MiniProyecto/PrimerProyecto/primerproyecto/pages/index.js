@@ -7,8 +7,8 @@ export default function Home() {
       <section className={estilos.hero}>
         <p className={estilos.sobrelinea}>CECyT 9 · Comunidad de aprendizaje</p>
         <div className={estilos.acciones}>
-          <Link className={estilos.primario} href="/talleres">Explorar talleres</Link>
-          <Link className={estilos.secundario} href="/perfil">Consultar mi perfil</Link>
+          <Link className={estilos.primario} href="/talleres">talleres</Link>
+          <Link className={estilos.secundario} href="/perfil">Consultar 4mi perfil</Link>
         </div>
       </section>
 
