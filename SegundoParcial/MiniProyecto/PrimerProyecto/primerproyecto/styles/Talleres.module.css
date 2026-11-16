@@ -33,7 +33,7 @@
 
 .relleno {
   height: 100%;
-  background: #6b1d3a;
+  background: var(--azul-cielo);
 }
 
 .lleno {
@@ -42,7 +42,7 @@
 }
 
 .volver {
-  color: #6b1d3a;
+  color: var(--azul-indigo);
   font-weight: 600;
 }
 
@@ -60,6 +60,6 @@
 }
 
 .lista a {
-  color: #6b1d3a;
+  color: var(--azul-indigo);
   font-weight: 600;
 }

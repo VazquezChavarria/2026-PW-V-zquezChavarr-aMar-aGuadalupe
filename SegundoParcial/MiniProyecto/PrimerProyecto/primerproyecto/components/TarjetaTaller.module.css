@@ -5,7 +5,7 @@
   gap: 6px;
   padding: 16px;
   border: 1px solid #e5e7eb;
-  border-top: 4px solid #6b1d3a;
+  border-top: 4px solid var(--azul-cielo);
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -19,7 +19,7 @@
 
 .titulo {
   margin: 4px 0;
-  color: #6b1d3a;
+  color: var(--azul-marino);
 }
 
 .dato {
@@ -49,7 +49,7 @@
 .enlace {
   margin-top: auto;
   padding-top: 8px;
-  color: #6b1d3a;
+  color: var(--azul-indigo);
   font-weight: 600;
   text-decoration: none;
 }

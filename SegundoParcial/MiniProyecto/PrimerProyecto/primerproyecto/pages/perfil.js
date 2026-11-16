@@ -57,10 +57,26 @@ export default function Perfil() {
       <h1>Mi perfil</h1>
 
       <form onSubmit={buscar} className="formulario">
-        <input placeholder="Tu boleta (10 dígitos)" value={boleta} onChange={(e) => setBoleta(e.target.value)} />
+        <label>
+          Tu boleta
+          <input
+            name="boleta"
+            type="text"
+            inputMode="numeric"
+            autoComplete="off"
+            placeholder="10 dígitos"
+            pattern="[0-9]{10}"
+            title="Escribe exactamente 10 dígitos."
+            minLength={10}
+            maxLength={10}
+            required
+            value={boleta}
+            onChange={(e) => setBoleta(e.target.value)}
+          />
+        </label>
         <button type="submit" disabled={cargando}>{cargando ? 'Buscando…' : 'Ver mi perfil'}</button>
       </form>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error" role="alert">{error}</p>}
 
       {buscada && (
         <>

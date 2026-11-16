@@ -112,14 +112,43 @@ export default function DetalleTaller() {
       <section className={estilos.panel}>
         <h2>Inscribirme</h2>
         <form onSubmit={inscribir} className="formulario">
-          <input placeholder="Nombre completo" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-          <input placeholder="Boleta (10 dígitos)" value={boleta} onChange={(e) => setBoleta(e.target.value)} />
+          <label>
+            Nombre completo
+            <input
+              name="nombre"
+              type="text"
+              autoComplete="name"
+              placeholder="Ej. María López"
+              minLength={3}
+              maxLength={100}
+              required
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+            />
+          </label>
+          <label>
+            Boleta
+            <input
+              name="boleta"
+              type="text"
+              inputMode="numeric"
+              autoComplete="off"
+              placeholder="10 dígitos"
+              pattern="[0-9]{10}"
+              title="Escribe exactamente 10 dígitos."
+              minLength={10}
+              maxLength={10}
+              required
+              value={boleta}
+              onChange={(e) => setBoleta(e.target.value)}
+            />
+          </label>
           <button type="submit" disabled={lleno || enviando}>
             {lleno ? 'Sin lugares' : enviando ? 'Inscribiendo…' : 'Inscribirme'}
           </button>
         </form>
-        {errorForm && <p className="error">{errorForm}</p>}
-        {exito && <p className={estilos.exito}>{exito}</p>}
+        {errorForm && <p className="error" role="alert">{errorForm}</p>}
+        {exito && <p className={estilos.exito} role="status">{exito}</p>}
       </section>
 
       <h2>Inscritos ({ocupados})</h2>

@@ -1,0 +1,140 @@
+.inicio {
+  padding-top: 36px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 7vw, 76px);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 86% 12%, rgb(21 145 234 / 22%), transparent 31%),
+    linear-gradient(125deg, #00008a 0%, #243db5 56%, #4052d6 100%);
+  color: #fff;
+  box-shadow: 0 24px 60px rgb(0 0 138 / 18%);
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 12px 0 18px;
+  color: #fff;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.055em;
+}
+
+.hero h1 span {
+  color: #9ed8ff;
+}
+
+.sobrelinea {
+  margin: 0;
+  color: #d8eaff;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.intro {
+  max-width: 600px;
+  margin: 0;
+  color: #e7efff;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.primario,
+.secundario {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.primario {
+  background: #fff;
+  color: #00008a;
+}
+
+.primario:hover {
+  background: #e8f4ff;
+  transform: translateY(-2px);
+}
+
+.secundario {
+  border-color: rgb(255 255 255 / 55%);
+  color: #fff;
+}
+
+.secundario:hover {
+  background: rgb(255 255 255 / 12%);
+  transform: translateY(-2px);
+}
+
+.seccion {
+  padding: 64px 0 12px;
+}
+
+.seccion > .sobrelinea {
+  color: #4052d6;
+}
+
+.seccion h2 {
+  margin: 8px 0 24px;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.tarjeta {
+  min-height: 190px;
+  padding: 22px;
+  border: 1px solid #dce5f2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(22 46 90 / 5%);
+}
+
+.numero {
+  color: #1591ea;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.tarjeta h3 {
+  margin: 10px 0 7px;
+  font-size: 1.2rem;
+}
+
+.tarjeta p {
+  margin: 0;
+  color: #526179;
+}
+
+@media (max-width: 760px) {
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .tarjeta {
+    min-height: auto;
+  }
+}

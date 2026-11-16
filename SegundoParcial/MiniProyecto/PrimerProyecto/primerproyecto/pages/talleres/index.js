@@ -35,6 +35,8 @@ export default function Talleres() {
 
       <input
         className={estilos.buscador}
+        type="search"
+        aria-label="Buscar talleres por nombre o instructor"
         placeholder="Buscar por nombre o instructor"
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}

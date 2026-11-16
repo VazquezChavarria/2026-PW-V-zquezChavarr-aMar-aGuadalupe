@@ -18,7 +18,7 @@ async function obtenerPorId(id) {
 async function crear({ nombre, correo, contrasenaHash, boleta, rol }) {
     const [info] = await pool.query(
         `INSERT INTO usuarios (nombre, correo, contrasena_hash, boleta, rol) VALUES (?, ?, ?, ?, ?)`,
-        [nombre, correo, contrasenaHash, boleta, rol || 'alumno']
+        [nombre.trim(), correo.trim().toLowerCase(), contrasenaHash, boleta.trim(), rol || 'alumno']
     );
     return obtenerPorId(info.insertId);
 }
@@ -26,7 +26,14 @@ async function crear({ nombre, correo, contrasenaHash, boleta, rol }) {
 // actualizar un usuario (solo los campos que lleguen)
 async function actualizar(id, { nombre, correo, rol }) {
     // CORRECCIÓN: sin corchetes; así `cambios` es la lista completa de [columna, valor]
-    const cambios = Object.entries({ nombre, correo, rol }).filter(([, valor]) => valor !== undefined);
+    const cambios = Object.entries({ nombre, correo, rol })
+        .filter(([, valor]) => valor !== undefined)
+        .map(([columna, valor]) => [
+            columna,
+            typeof valor === 'string' ? valor.trim() : valor,
+        ]);
+    const correoCambio = cambios.find(([columna]) => columna === 'correo');
+    if (correoCambio) correoCambio[1] = correoCambio[1].toLowerCase();
     if (cambios.length === 0) return obtenerPorId(id);
 
     const columnas = cambios.map(([columna]) => `${columna} = ?`).join(', ');
@@ -39,7 +46,6 @@ async function actualizar(id, { nombre, correo, rol }) {
 }
 
 // eliminar
-// CORRECCIÓN: ahora recibe el parámetro id
 async function eliminar(id) {
     const [info] = await pool.query(`DELETE FROM usuarios WHERE id = ?`, [id]);
     return info.affectedRows > 0;
@@ -53,7 +59,3 @@ async function buscarPorCorreoConHash(correo) {
 
 // siempre hay que exportar las funciones para poder crear la API
 module.exports = { listar, obtenerPorId, crear, actualizar, eliminar, buscarPorCorreoConHash };
-
-// Pendiente (tarea): crear las otras entidades, talleres y asistencias
-// - talleres: consultarPorTaller y registrarseEnUnTaller
-// - asistencias: registrarAsistenciaEnElTaller y consultarListaDeAsistencias
